@@ -3,7 +3,7 @@
 <h2>🚩 TWW Treasure Helper</h2>
 
 <p>
-  <a href="https://wisl884.github.io/treasurehelper/riddles" target="_blank">
+  <a href="https://Anxious0.github.io/treasurehelper/riddles" target="_blank">
     <img src="https://img.shields.io/badge/Visit%20Site-Click%20Here-1e90ff?style=for-the-badge&logo=google-chrome" alt="Visit Site">
   </a>
 </p>
