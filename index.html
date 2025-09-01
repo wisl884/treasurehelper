@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="description" content="View">
+    <meta charset="UTF-8">
+    <title>TWW Treasure Helper: Bio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="active"><a href="index.html">Bio</a></li>
+            <li><a href="riddles.html">Riddles</a></li>
+        </ul>
+    </nav>
+    <main style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh;">
+        <h1 id="questHeader" style="margin-bottom: 1.5rem;">View My Bio</h1>
+        <a href="https://guns.lol/x6ro" target="_blank" rel="noopener" 
+           style="
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                background: linear-gradient(135deg, #3ec6b0 0%, #3a6ea5 100%);
+                color: #fff;
+                font-weight: 600;
+                font-size: 1.25rem;
+                padding: 0.75rem 2rem;
+                border-radius: 8px;
+                text-decoration: none;
+                box-shadow: 0 4px 16px rgba(62,198,176,0.15);
+                transition: background 0.2s, transform 0.2s;
+           "
+           onmouseover="this.style.background='linear-gradient(135deg, #3a6ea5 0%, #3ec6b0 100%)'; this.style.transform='scale(1.04)';"
+           onmouseout="this.style.background='linear-gradient(135deg, #3ec6b0 0%, #3a6ea5 100%)'; this.style.transform='scale(1)';"
+        >
+            <svg height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline;">
+                <circle cx="16" cy="16" r="16" fill="#3ec6b0"/>
+                <path d="M16 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c4.418 0 8 2.015 8 4.5V25H8v-2.5C8 20.015 11.582 18 16 18z" fill="#fff"/>
+            </svg>
+            View Bio
+        </a>
+    </main>
+</body>
+</html>
