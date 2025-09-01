@@ -387,10 +387,17 @@
         
         <div id="imageModal" class="modal">
             <span class="close" onclick="closeModal()">&times;</span>
+            <button class="nav-btn prev-btn" onclick="previousImage()">❮</button>
+            <button class="nav-btn next-btn" onclick="nextImage()">❯</button>
             <img class="modal-content" id="modalImage">
+            <div class="thumbnails-container" id="thumbnailsContainer"></div>
         </div>
         
         <script>
+            let currentImageIndex = 0;
+            let currentImageContainer = null;
+            let currentImages = [];
+            
             document.getElementById("search").oninput = function(){
                 var search = document.getElementById("search").value;
                 var figCap = document.getElementsByClassName("figCap");
@@ -408,13 +415,89 @@
             function openModal(imgSrc) {
                 var modal = document.getElementById("imageModal");
                 var modalImg = document.getElementById("modalImage");
+                
+                var clickedImg = event.target;
+                var imageContainer = clickedImg.closest('.image-container');
+                
+                currentImageContainer = imageContainer;
+                currentImages = Array.from(imageContainer.querySelectorAll('img')).map(img => img.src);
+                currentImageIndex = currentImages.indexOf(imgSrc);
+                
                 modal.style.display = "block";
                 modalImg.src = imgSrc;
+                
+                createThumbnails();
+                updateNavigationButtons();
+            }
+            
+            function createThumbnails() {
+                var thumbnailsContainer = document.getElementById("thumbnailsContainer");
+                thumbnailsContainer.innerHTML = "";
+                
+                if (currentImages.length > 1) {
+                    currentImages.forEach((src, index) => {
+                        var thumbnail = document.createElement("img");
+                        thumbnail.src = src;
+                        thumbnail.className = "thumbnail";
+                        if (index === currentImageIndex) {
+                            thumbnail.classList.add("active");
+                        }
+                        thumbnail.onclick = function() {
+                            currentImageIndex = index;
+                            document.getElementById("modalImage").src = src;
+                            updateThumbnailActive();
+                        };
+                        thumbnailsContainer.appendChild(thumbnail);
+                    });
+                }
+            }
+            
+            function updateThumbnailActive() {
+                var thumbnails = document.querySelectorAll(".thumbnail");
+                thumbnails.forEach((thumb, index) => {
+                    if (index === currentImageIndex) {
+                        thumb.classList.add("active");
+                    } else {
+                        thumb.classList.remove("active");
+                    }
+                });
+            }
+            
+            function nextImage() {
+                if (currentImages.length > 1) {
+                    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+                    document.getElementById("modalImage").src = currentImages[currentImageIndex];
+                    updateThumbnailActive();
+                }
+            }
+            
+            function previousImage() {
+                if (currentImages.length > 1) {
+                    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+                    document.getElementById("modalImage").src = currentImages[currentImageIndex];
+                    updateThumbnailActive();
+                }
+            }
+            
+            function updateNavigationButtons() {
+                var prevBtn = document.querySelector('.prev-btn');
+                var nextBtn = document.querySelector('.next-btn');
+                
+                if (currentImages.length <= 1) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                } else {
+                    prevBtn.style.display = 'block';
+                    nextBtn.style.display = 'block';
+                }
             }
             
             function closeModal() {
                 var modal = document.getElementById("imageModal");
                 modal.style.display = "none";
+                currentImageContainer = null;
+                currentImages = [];
+                currentImageIndex = 0;
             }
             
             document.getElementById("imageModal").onclick = function(e) {
@@ -426,6 +509,10 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    previousImage();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
                 }
             });
         </script>
